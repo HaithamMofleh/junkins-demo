@@ -3,37 +3,19 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        echo 'From Build Stage'
-        sh 'php --version'
-      }
-    }
-
-    stage('Dev') {
-      steps {
-        echo 'From Dev Stage'
+        echo 'From Build Stage(DEV)'
       }
     }
 
     stage('Test') {
-      parallel {
-        stage('Test 1') {
-          steps {
-            echo 'From Test Stage 1'
-          }
-        }
-
-        stage('Test 2') {
-          steps {
-            echo 'From Test Stage 2'
-          }
-        }
-
+      steps {
+        echo 'From Test Stage(DEV)'
       }
     }
 
     stage('Deploy') {
       steps {
-        echo 'From Deploy Stage'
+        echo 'From Deploy Stage(DEV)'
       }
     }
 
