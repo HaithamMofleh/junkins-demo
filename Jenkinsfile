@@ -4,6 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'From Build Stage'
+        sh 'php --version'
       }
     }
 
