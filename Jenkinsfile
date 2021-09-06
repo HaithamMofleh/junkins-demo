@@ -7,6 +7,12 @@ pipeline {
       }
     }
 
+    stage('Dev') {
+      steps {
+        echo 'From Dev Stage'
+      }
+    }
+
     stage('Test') {
       parallel {
         stage('Test 1') {
