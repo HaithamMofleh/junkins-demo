@@ -1,23 +1,30 @@
 pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        echo 'From Build Stage(DEV)'
-      }
+    agent any
+    parameters {
+        string(name:'DEPLOY_VERSION' , defaultValue:'' , description:'')
+        choice(name:'VERSION' , choices: ['1.0','1.2'] , description:'')
     }
-
-    stage('Test') {
-      steps {
-        echo 'From Test Stage(DEV)'
-      }
+    environment {
+        NEW_VERSION ='1.0.0'
     }
+    stages {
+        stage("Build") {
+            steps {
+                echo "NEW_VERSION ${NEW_VERSION}"
+                echo "VERSION ${params.VERSION}"
+                echo "DEPLOY_VERSION ${params.DEPLOY_VERSION}"
+            }
+        }
 
-    stage('Deploy') {
-      steps {
-        echo 'From Deploy Stage(DEV)'
-      }
+        stage("Deploy") {
+            when {
+                expression {
+                    BRANCH_NAME == 'dev'
+                }
+            }
+            steps {
+                echo "Deploy paras ${params.VERSION}"
+            }
+        }
     }
-
-  }
 }
